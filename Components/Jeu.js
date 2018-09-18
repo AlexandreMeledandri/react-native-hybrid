@@ -26,6 +26,7 @@ class Jeu extends React.Component {
             value={this.state.suggestedNumber}/>
             <View style={styles.marginBottom}>
             <Button
+            style={styles.submit}
             title='Deviner' 
             onPress={() => {
                 if(this.state.plays < 5) {
@@ -35,6 +36,7 @@ class Jeu extends React.Component {
                     this.setState({
                         bodyText: 'Vous n\'avez plus d\'essais'
                     })
+                    this.styles.submit = 'none'
                 }
             }}/>
             </View>
@@ -99,6 +101,9 @@ const styles = StyleSheet.create({
     },
      marginBottom: {
         marginBottom: 10
+    },
+    submit: {
+        display: 'block'
     },
     counter: {
         marginBottom: 10
