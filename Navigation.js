@@ -1,8 +1,8 @@
-import { createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 import Jeu from './Components/Jeu';
 import About from './Components/About';
 
-const StackNavigator = createStackNavigator({
+const TabNavigator = createBottomTabNavigator({
     Jeu: {
       screen: Jeu,
       navigationOptions: {
@@ -17,4 +17,4 @@ const StackNavigator = createStackNavigator({
       }
   })
   
-  export default StackNavigator
+  export default TabNavigator

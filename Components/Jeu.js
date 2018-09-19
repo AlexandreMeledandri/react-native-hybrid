@@ -26,7 +26,7 @@ class Jeu extends React.Component {
         }}
         />;
         if(this.state.plays === 5){
-            submitbutton = '';
+            submitbutton = undefined;
         }
 
         return (
