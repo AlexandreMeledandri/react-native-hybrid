@@ -6,14 +6,14 @@ class Jeu extends React.Component {
         super(props);
         this.state = {
             bodyText: 'Trouve ma valeur, et je t\'offrirai le bonheur',
-            suggestedNumber = null,
+            suggestedNumber : null,
             number : Math.round(Math.random()*1000) 
-        };
+        }
     }
   render() {
     return (
       <View style={styles.container}>
-        <Text></Text>
+        <Text style={styles.bodyText}>{this.state.bodyText}</Text>
         <TextInput style={styles.textinput} placeholder='Entrez votre valeur' value= {this.state.suggestedNumber}
         onChangeText={(suggestedNumber) => this.setState({suggestedNumber})}/> 
         <Button style={{height: 50}} title='Envoyer'onPress={() => {
@@ -29,28 +29,31 @@ class Jeu extends React.Component {
   // Function
 
   hint = (_value) => {
-      if(_value === 0)
-        this.setState({bodyText = 'Victory !!!'});
-      else if(_value === 1)
-        this.setState({bodyText = 'Dommage c\'est moins.'});
-      else if(_value === 2)
-        this.setState({bodyText = 'Ah, ah, ah, bah nan c\'est plus.'});         
-
+    if(_value === 0)
+        this.setState({bodyText : 'Victory !!!'});
+    else if(_value === 1) 
+        this.setState({bodyText : 'Dommage c\'est moins.'});
+    else if(_value === 2) 
+        this.setState({bodyText : 'Ah, ah, ah, bah nan c\'est plus.'});
+    else if(_value === -1)
+        this.setState({bodyText : 'error'});
   };
 
   comparate = () => {
-    if(this.state.suggestedNumber.toString() > this.state.number)
+    if(this.state.suggestedNumber === null){
+        return -1;
+    } else if(this.state.suggestedNumber.toString() < this.state.number)
         return 2;
-    else if(this.state.suggestedNumber.toString() < this.state.number)
-        return 1;
     else if(this.state.suggestedNumber.toString() > this.state.number)
+        return 1;
+    else if(this.state.suggestedNumber.toString() == this.state.number)
         return 0;
   };
 
   reset = () => {
-    this.setState({bodyText = 'Trouve ma valeur, et je t\'offrirai le bonheur',
+    this.setState({bodyText : 'Trouve ma valeur, et je t\'offrirai le bonheur',
     number : Math.round(Math.random()*1000),
-    suggestedNumber = null});
+    suggestedNumber : null});
   };
 }
 
