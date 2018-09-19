@@ -1,17 +1,34 @@
 import React from 'react'
-import { Text, StyleSheet, View, TextInput, Button } from 'react-native';
+import { Text, StyleSheet, View, TextInput, Button } from 'react-native'
 
 class Jeu extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
+        this.number = Math.round(Math.random()*1000)
         this.state = {
           bodyText: 'Essayez de deviner le chiffre mystère. il est compris entre 1 et 1000.\n\nAttention vous n\'avez que 5 essais',
           suggestedNumber: '',
-          number : Math.round(Math.random()*1000),
           plays: 0
         };
       }
     render() {
+        const submitButton = <Button
+        style={styles.submit}
+        title='Deviner' 
+        onPress={() => {
+            if(this.state.plays < 5) {
+                this.hint(this.comparate());
+            } else {
+                this.setState({
+                    bodyText: 'Vous n\'avez plus d\'essais'
+                })
+            }
+        }}
+        />;
+        if(this.state.plays === 5){
+            submitbutton = '';
+        }
+
         return (
             <View style={styles.container}>
                 <Text style={styles.counter}>
@@ -25,20 +42,7 @@ class Jeu extends React.Component {
             onChangeText={(suggestedNumber) => this.setState({suggestedNumber})}
             value={this.state.suggestedNumber}/>
             <View style={styles.marginBottom}>
-            <Button
-            style={styles.submit}
-            title='Deviner' 
-            onPress={() => {
-                if(this.state.plays < 5) {
-                    this.hint(this.comparate());
-                    this.state.plays++;
-                } else {
-                    this.setState({
-                        bodyText: 'Vous n\'avez plus d\'essais'
-                    })
-                    this.styles.submit = 'none'
-                }
-            }}/>
+                {submitButton}
             </View>
             <Button
             title='Recommencer' 
@@ -75,11 +79,14 @@ class Jeu extends React.Component {
         if(this.state.suggestedNumber === '') {
             return 2;
         }
-        if(this.state.suggestedNumber.toString() > this.state.number) {
+        this.setState({
+            plays: ++this.state.plays,
+        })
+        if(parseInt(this.state.suggestedNumber) > this.number) {
             return -1;
-        } else if(this.state.suggestedNumber.toString() < this.state.number){
+        } else if(parseInt(this.state.suggestedNumber) < this.number){
             return 1;
-        } else {
+        } else if(parseInt(this.state.suggestedNumber) === this.number){
             return 0
         }
 
@@ -88,9 +95,9 @@ class Jeu extends React.Component {
         this.setState({
             bodyText: 'Essayez de deviner le chiffre mystère. il est compris entre 1 et 1000.\n\nAttention vous n\'avez que 5 essais',
             suggestedNumber: '',
-            number : Math.round(Math.random()*1000)
-          });
-          this.state.plays = 0;
+            plays: 0
+        });
+        this.number = Math.round(Math.random()*1000)
     }
 }
 const styles = StyleSheet.create({
