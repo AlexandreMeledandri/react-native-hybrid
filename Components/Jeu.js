@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet, View, TextInput, Button } from 'react-native'
+import { connect } from 'react-redux'
 
 class Jeu extends React.Component {
     constructor(props) {
@@ -12,22 +13,6 @@ class Jeu extends React.Component {
         };
       }
     render() {
-        const submitButton = <Button
-        style={styles.submit}
-        title='Deviner' 
-        onPress={() => {
-            if(this.state.plays < 5) {
-                this.hint(this.comparate());
-            } else {
-                this.setState({
-                    bodyText: 'Vous n\'avez plus d\'essais'
-                })
-            }
-        }}
-        />;
-        if(this.state.plays === 5){
-            submitbutton = undefined;
-        }
 
         return (
             <View style={styles.container}>
@@ -42,7 +27,19 @@ class Jeu extends React.Component {
             onChangeText={(suggestedNumber) => this.setState({suggestedNumber})}
             value={this.state.suggestedNumber}/>
             <View style={styles.marginBottom}>
-                {submitButton}
+            <Button
+                title='Deviner' 
+                onPress={() => {
+                    if(this.state.plays < 5) {
+                        this.hint(this.comparate());
+                    } else {
+                        this.setState({
+                            bodyText: 'Vous n\'avez plus d\'essais'
+                        })
+                        this.addHistory()
+                    }
+                }}
+            />
             </View>
             <Button
             title='Recommencer' 
@@ -73,6 +70,7 @@ class Jeu extends React.Component {
             this.setState({
                 bodyText: 'Vous avez gagné',
             })
+            this.addHistory()
         }
     }
     comparate = () => {
@@ -99,6 +97,12 @@ class Jeu extends React.Component {
         });
         this.number = Math.round(Math.random()*1000)
     }
+
+    addHistory = () => {
+        console.log('number',this.number)
+        const action = { type: "ADD_HISTORY", value: {number: this.number, plays: this.state.plays }}
+        this.props.dispatch(action)
+    }
 }
 const styles = StyleSheet.create({
     container: {
@@ -122,4 +126,4 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }
   });
-export default Jeu
+export default connect()(Jeu)
