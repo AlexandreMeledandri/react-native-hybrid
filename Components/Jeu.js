@@ -3,13 +3,12 @@ import { Text, StyleSheet, View, TextInput, Button } from 'react-native'
 
 class Jeu extends React.Component {
     constructor(props) {
-        super(props)
-        this.number = Math.round(Math.random()*1000)
+        super(props);
         this.state = {
           bodyText: 'Essayez de deviner le chiffre mystère. il est compris entre 1 et 1000.\n\nAttention vous n\'avez que 5 essais',
           suggestedNumber: '',
           plays: 0
-        };
+        }
       }
     render() {
         const submitButton = <Button
@@ -42,7 +41,19 @@ class Jeu extends React.Component {
             onChangeText={(suggestedNumber) => this.setState({suggestedNumber})}
             value={this.state.suggestedNumber}/>
             <View style={styles.marginBottom}>
-                {submitButton}
+            <Button
+            style={styles.submit}
+            title='Deviner' 
+            onPress={() => {
+                if(this.state.plays < 5) {
+                    this.hint(this.comparate());
+                } else {
+                    this.setState({
+                        bodyText: 'Vous n\'avez plus d\'essais'
+                    })
+                    this.styles.submit = 'none'
+                }
+            }}/>
             </View>
             <Button
             title='Recommencer' 
@@ -79,12 +90,10 @@ class Jeu extends React.Component {
         if(this.state.suggestedNumber === '') {
             return 2;
         }
-        this.setState({
-            plays: ++this.state.plays,
-        })
-        if(parseInt(this.state.suggestedNumber) > this.number) {
+        this.state.plays++;
+        if(parseInt(this.state.suggestedNumber) > this.props.number) {
             return -1;
-        } else if(parseInt(this.state.suggestedNumber) < this.number){
+        } else if(parseInt(this.state.suggestedNumber) < this.props.number){
             return 1;
         } else if(parseInt(this.state.suggestedNumber) === this.number){
             return 0
@@ -95,9 +104,9 @@ class Jeu extends React.Component {
         this.setState({
             bodyText: 'Essayez de deviner le chiffre mystère. il est compris entre 1 et 1000.\n\nAttention vous n\'avez que 5 essais',
             suggestedNumber: '',
-            plays: 0
-        });
-        this.number = Math.round(Math.random()*1000)
+          });
+          this.props.number = Math.round(Math.random()*1000)
+          this.state.plays = 0;
     }
 }
 const styles = StyleSheet.create({
