@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, View, TextInput, Button } from 'react-native'
+import { Text, StyleSheet, View, TextInput, Button } from 'react-native';
 
 class Jeu extends React.Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class Jeu extends React.Component {
       }
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Text style={styles.counter}>
                 Coups: {this.state.plays}
             </Text>
@@ -45,6 +45,9 @@ class Jeu extends React.Component {
             onPress={() => {
                 this.reset();
             }}/>
+            <View>
+                <Button title={'A propos'} onPress={() => this.props.navigation.navigate('About')}/>
+            </View>
             </View>
         )
     }
@@ -91,6 +94,12 @@ class Jeu extends React.Component {
     }
 }
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
     suggestInput: {
         width: 120,
         padding:10,
@@ -101,9 +110,6 @@ const styles = StyleSheet.create({
     },
      marginBottom: {
         marginBottom: 10
-    },
-    submit: {
-        display: 'block'
     },
     counter: {
         marginBottom: 10
