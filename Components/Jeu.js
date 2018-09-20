@@ -100,8 +100,10 @@ class Jeu extends React.Component {
     }
 
     addHistory = () => {
-        console.log('number',this.number)
-        const action = { type: "ADD_HISTORY", value: {number: this.number, plays: this.state.plays }}
+        const action = { 
+            type: "ADD_HISTORY", 
+            value: {name: this.props.navigation.getParam('name'),number: this.number, plays: this.state.plays }
+        }
         this.props.dispatch(action)
     }
 }

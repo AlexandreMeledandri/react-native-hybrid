@@ -23,8 +23,9 @@ class Historique extends React.Component {
         if(this.props.lastScore){
             return this.props.lastScore.map((item,index)=>(
                 <View key={index}>
+                <Text>Nom: { item.name }</Text>
                 <Text>Nombre à trouver: { item.number }</Text>
-                <Text>Nombre d'essais{ item.plays }</Text>
+                <Text>Nombre d'essais: { item.plays }</Text>
                 </View>
             ))
         }
