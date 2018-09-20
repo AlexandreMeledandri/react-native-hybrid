@@ -7,7 +7,7 @@ function addHistorique(state, action) {
         case 'PUT_NEW_SCORE':
         nextState = [{
             ...state,
-            scoreBoard: [...state.lastScore, action.value]
+            lastScore: [...state.lastScore, action.value]
         }]
             return nextState || state
     default:
