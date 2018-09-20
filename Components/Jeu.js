@@ -73,6 +73,7 @@ class Jeu extends React.Component {
             this.addHistory()
         }
     }
+
     comparate = () => {
         if(this.state.suggestedNumber === '' || this.state.suggestedNumber === null) {
             return 2;
@@ -87,8 +88,8 @@ class Jeu extends React.Component {
         } else if(parseInt(this.state.suggestedNumber) === this.number){
             return 0
         }
-
     }
+    
     reset = () => {
         this.setState({
             bodyText: 'Essayez de deviner le chiffre mystère. il est compris entre 1 et 1000.\n\nAttention vous n\'avez que 5 essais',
