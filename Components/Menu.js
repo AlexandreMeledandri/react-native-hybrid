@@ -17,7 +17,7 @@ class menu extends React.Component {
             onChangeText={(NomJoueur) => this.setState({NomJoueur})}
             value={this.state.NomJoueur}/>
             <Button
-            title='Commencer' onPress={() => { this.props.navigation.navigate('jeu') }}/>
+            title='Commencer' onPress={() => { this.props.navigation.navigate('jeu', {this.state.NomJoueur} ) }}/>
             </View>
         )
     }
