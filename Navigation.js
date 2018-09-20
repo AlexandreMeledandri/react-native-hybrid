@@ -6,6 +6,7 @@
   import Jeu from './Components/Jeu';
   import About from './Components/About';
   import Historique from './Components/Historique'
+  import Menu from './Components/Menu'
 
   const Reducers = combineReducers({addHistorique}); //Pour utiliser plusieurs Reducers
 
