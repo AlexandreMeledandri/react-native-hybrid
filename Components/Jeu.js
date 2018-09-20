@@ -1,9 +1,11 @@
 import React from 'react'
 import { Text, StyleSheet, View, TextInput, Button } from 'react-native'
+import { connect } from 'react-redux'
 
 class Jeu extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
+        this.number = Math.round(Math.random()*1000)
         this.state = {
           bodyText: 'Essayez de deviner le chiffre mystère. il est compris entre 1 et 1000.\n\nAttention vous n\'avez que 5 essais',
           suggestedNumber: '',
@@ -90,7 +92,7 @@ class Jeu extends React.Component {
         if(this.state.suggestedNumber === '') {
             return 2;
         }
-        this.state.plays++;
+        this.setState({plays: ++this.state.plays});
         if(parseInt(this.state.suggestedNumber) > this.props.number) {
             return -1;
         } else if(parseInt(this.state.suggestedNumber) < this.props.number){
@@ -107,6 +109,11 @@ class Jeu extends React.Component {
           });
           this.props.number = Math.round(Math.random()*1000)
           this.state.plays = 0;
+    }
+
+    addHistory = () => {
+        const action = [{Type: 'PUT_NEW_SCORE', value: {number: this.props.number, plays: this.state.plays}}]
+        this.props.dispacth(action)
     }
 }
 const styles = StyleSheet.create({
@@ -131,4 +138,4 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }
   });
-export default Jeu
+export default connect()(Jeu)

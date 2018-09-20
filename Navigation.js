@@ -1,8 +1,9 @@
-import { createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 import Jeu from './Components/Jeu';
 import About from './Components/About';
+import Historique from './Components/Historique'
 
-const StackNavigator = createStackNavigator({
+const TabNavigator = createBottomTabNavigator({
     Jeu: {
       screen: Jeu,
       navigationOptions: {
@@ -14,7 +15,13 @@ const StackNavigator = createStackNavigator({
         navigationOptions: {
           title: 'A propos'
         }
+      },
+      Historique: {
+        screen: Historique,
+        navigationOptions: {
+          title: 'Historique'
+        }
       }
   })
   
-  export default StackNavigator
+  export default TabNavigator
