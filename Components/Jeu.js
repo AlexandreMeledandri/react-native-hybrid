@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet, View, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
+import addHistorique from '../Store/Reduce/addHistorique';
 
 class Jeu extends React.Component {
     constructor(props) {
@@ -44,7 +45,6 @@ class Jeu extends React.Component {
             value={this.state.suggestedNumber}/>
             <View style={styles.marginBottom}>
             <Button
-            style={styles.submit}
             title='Deviner' 
             onPress={() => {
                 if(this.state.plays < 5) {
@@ -86,6 +86,7 @@ class Jeu extends React.Component {
             this.setState({
                 bodyText: 'Vous avez gagné',
             })
+            this.addHistory();
         }
     }
     comparate = () => {
