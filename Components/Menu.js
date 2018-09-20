@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, TextInput, Button } from 'react-native'
+import { connect } from 'react-redux'
 
 class menu extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class menu extends React.Component {
             onChangeText={(NomJoueur) => this.setState({NomJoueur})}
             value={this.state.NomJoueur}/>
             <Button
-            title='Commencer' onPress={() => { this.props.navigation.navigate('jeu', {this.state.NomJoueur} ) }}/>
+            title='Commencer' onPress={() => { this.props.navigation.navigate('Jeu', {name: this.state.NomJoueur})}}/>
             </View>
         )
     }
