@@ -22,6 +22,12 @@ const TabNavigator = createBottomTabNavigator({
           title: 'Historique'
         }
       }
-  })
-  
+  }),
+  Jeu: {
+    screen: Menu,
+    navigationOptions: {
+      title: 'Menu'
+    }
+  }
+
   export default TabNavigator
