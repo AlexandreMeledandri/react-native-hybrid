@@ -6,19 +6,31 @@ class Historique extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+
         }
     }
     render() {
+        let scores = showScores()
+        console.log(this.props)
+        console.log(this.props.state.lastScore)
         return (
             <View style={styles.container}>
             <Text style={styles.description}>Voici les résultats des 5 dernières parties :</Text>
-            <Text style={styles.tabscore}></Text>
+                { scores }
             </View>
         )
     }
 }
+const showScores = () => {
+    if(this.props.state.lastScore){
+        this.props.state.lastScore.map((item)=>(
+            <Text>{ item.number }</Text>
+        ))
+        }
+}
 const mapStateToProps = (state) => {
-    return {lastScore: state.lastScore
+    return {
+        state
         }
     }
 
