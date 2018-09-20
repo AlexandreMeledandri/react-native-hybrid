@@ -6,12 +6,18 @@
   import Jeu from './Components/Jeu';
   import About from './Components/About';
   import Historique from './Components/Historique'
-  
+
   const Reducers = combineReducers({addHistorique}); //Pour utiliser plusieurs Reducers
-  
+
   export const store = createStore(Reducers);
-  
+
   const MyStack = createDrawerNavigator({
+    Menu: {
+      screen: Menu,
+      navigationOptions: {
+        title: 'Menu'
+      }
+    },
     Jeu: {
       screen: Jeu,
       navigationOptions: {
@@ -31,11 +37,11 @@
         }
       }
   });
-  
+
   export const middleware = createReactNavigationReduxMiddleware("root", state => state.navigation); // Pour connecter toutes les pages de react-navigation a redux grace au Middleware
-  
+
   const addListner = reduxifyNavigator(MyStack, "root"); // Pour dire que l'on utilise le Navigator 'myStack'
-  
+
   const mapStateToProps = state => ({navigation : state.navigation}); // Pour lier le store au navigator
-  
+
   export default ConnectDrawer = connect(mapStateToProps)(MyStack);// Pour finir la connection a redux
