@@ -1,4 +1,6 @@
 import { createStore } from 'redux';
-import addHistory from './Reducers/historyReducer'
+import addHistorique from './Reduce/addHistorique'
 
-export default createStore(addHistory)
+
+
+export default createStore(addHistorique)

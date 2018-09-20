@@ -10,7 +10,7 @@ class Jeu extends React.Component {
           bodyText: 'Essayez de deviner le chiffre mystère. il est compris entre 1 et 1000.\n\nAttention vous n\'avez que 5 essais',
           suggestedNumber: '',
           plays: 0
-        };
+        }
       }
     render() {
 
