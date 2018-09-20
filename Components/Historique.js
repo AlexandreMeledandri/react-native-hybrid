@@ -5,14 +5,13 @@ import { connect } from 'react-redux'
 class Historique extends React.Component {
     constructor(props) {
         super(props)
+        console.log(this.props)
         this.state = {
 
         }
     }
     render() {
-        let scores = showScores()
-        console.log(this.props)
-        console.log(this.props.state.lastScore)
+        let scores = this.showScores()
         return (
             <View style={styles.container}>
             <Text style={styles.description}>Voici les résultats des 5 dernières parties :</Text>
@@ -20,17 +19,20 @@ class Historique extends React.Component {
             </View>
         )
     }
-}
-const showScores = () => {
-    if(this.props.state.lastScore){
-        this.props.state.lastScore.map((item)=>(
-            <Text>{ item.number }</Text>
-        ))
+    showScores = () => {
+        if(this.props.lastScore){
+            return this.props.lastScore.map((item,index)=>(
+                <View key={index}>
+                <Text>Nombre à trouver: { item.number }</Text>
+                <Text>Nombre d'essais{ item.plays }</Text>
+                </View>
+            ))
         }
+    }
 }
 const mapStateToProps = (state) => {
     return {
-        state
+        lastScore: state.lastScore
         }
     }
 
