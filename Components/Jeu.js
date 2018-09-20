@@ -13,7 +13,6 @@ class Jeu extends React.Component {
         }
       }
     render() {
-
         return (
             <View style={styles.container}>
                 <Text style={styles.counter}>
@@ -22,13 +21,14 @@ class Jeu extends React.Component {
             <Text style={styles.bodyText}>
                 {this.state.bodyText}
             </Text>
-            <TextInput 
+            <TextInput
+            keyboardType='numeric'
             style={styles.suggestInput} placeholder='Entrez un chiffre'
             onChangeText={(suggestedNumber) => this.setState({suggestedNumber})}
             value={this.state.suggestedNumber}/>
             <View style={styles.marginBottom}>
             <Button
-                title='Deviner' 
+                title='Deviner'
                 onPress={() => {
                     if(this.state.plays < 5) {
                         this.hint(this.comparate());
@@ -42,7 +42,7 @@ class Jeu extends React.Component {
             />
             </View>
             <Button
-            title='Recommencer' 
+            title='Recommencer'
             onPress={() => {
                 this.reset();
             }}/>
@@ -74,7 +74,7 @@ class Jeu extends React.Component {
         }
     }
     comparate = () => {
-        if(this.state.suggestedNumber === '') {
+        if(this.state.suggestedNumber === '' || this.state.suggestedNumber === null) {
             return 2;
         }
         this.setState({
