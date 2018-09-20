@@ -1,10 +1,10 @@
 
 const initialState = {lastScore: []}
 
-function addHistorique(state, action) {
+function addHistorique(state = initialState, action) {
     let nextState
     switch (action.type) {
-        case 'PUT_NEW_SCORE':
+        case 'ADD_HISTORY':
         nextState = [{
             ...state,
             lastScore: [...state.lastScore, action.value]
