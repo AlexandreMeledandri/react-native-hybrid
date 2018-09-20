@@ -2,8 +2,15 @@ import { createBottomTabNavigator } from 'react-navigation';
 import Jeu from './Components/Jeu';
 import About from './Components/About';
 import Historique from './Components/Historique'
+import Menu from './Components/Menu';
 
 const TabNavigator = createBottomTabNavigator({
+    Menu: {
+      screen: Menu,
+      navigationOptions: {
+        title: 'Menu'
+      }
+    },
     Jeu: {
       screen: Jeu,
       navigationOptions: {
@@ -22,12 +29,6 @@ const TabNavigator = createBottomTabNavigator({
           title: 'Historique'
         }
       }
-  }),
-  Jeu: {
-    screen: Menu,
-    navigationOptions: {
-      title: 'Menu'
-    }
-  }
+  })
 
   export default TabNavigator
